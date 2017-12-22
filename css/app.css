@@ -4,6 +4,10 @@ body {
   padding: 0;
 }
 
+*{
+  font-family: 'Asul', sans-serif;
+}
+
 html {
   height: 100%;
 }
