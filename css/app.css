@@ -12,3 +12,12 @@ html {
   height: 100%;
   width: 100%;
 }
+
+.panel {
+  z-index: 5;
+  height: 90%;
+  width: 20%;
+  background-color: #d8d8d8;
+  position: absolute;
+  padding: 5%;
+}
