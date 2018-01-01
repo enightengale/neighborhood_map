@@ -21,12 +21,12 @@ function AppViewModel(){
 
     var marker;
 
-    for(let i = 0; i < locations.length; i++){
+    for(let i = 0; i < this.locations.length; i++){
 
       marker = new google.maps.Marker({
-        position: locations[i].location,
+        position: this.locations[i].location,
         map: map,
-        title: locations[i].title,
+        title: this.locations[i].title,
         animation: google.maps.Animation.DROP
       });
     }
