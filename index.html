@@ -11,7 +11,7 @@
     <div class="panel">
       <h1>Coffee Shops in Lansing</h1>
       <ul class="list" data-bind="foreach: locations">
-        <li data-bind="text: title"></li>
+        <li data-bind="text: title, click: $parent.zoomOnLocation"></li>
       </ul>
     </div>
     <div id="map">

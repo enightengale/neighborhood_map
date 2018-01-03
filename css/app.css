@@ -25,3 +25,15 @@ html {
   position: absolute;
   padding: 5%;
 }
+
+li {
+  cursor: pointer;
+  list-style: none;
+  line-height: 2em;
+}
+
+li:hover {
+  background-color: #b5b4b4;
+  font-size: 20px;
+  padding: 5px;
+}
