@@ -37,3 +37,11 @@ li:hover {
   font-size: 20px;
   padding: 5px;
 }
+
+@media only screen and (max-width: 970px){
+  .panel {
+    width: 100%;
+    height: auto;
+    position: inherit;
+  }
+}

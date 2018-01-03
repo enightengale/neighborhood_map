@@ -8,6 +8,7 @@ function initMap(){
       zoom: 11
     });
 
+
 function AppViewModel(){
      //hard coding the locations, giving each a lat and lng
      this.locations = ko.observableArray([
