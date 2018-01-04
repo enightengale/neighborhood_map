@@ -10,14 +10,15 @@
   <body>
     <div class="panel">
       <h1>Coffee Shops in Lansing</h1>
+      <input class="input" placeholder="Enter a Location" type="text" >
       <ul class="list" data-bind="foreach: locations">
-        <li data-bind="text: title, click: $parent.zoomOnLocation"></li>
+        <li data-bind="text: title, click: $parent.zoomOnLocation">
+        </li>
       </ul>
     </div>
     <div id="map">
 
     </div>
-
 
     <script type="text/javascript" src="js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
