@@ -19,7 +19,7 @@ html {
 
 .panel {
   z-index: 5;
-  height: 90%;
+  height: auto;
   width: 20%;
   background-color: #d8d8d8;
   position: absolute;

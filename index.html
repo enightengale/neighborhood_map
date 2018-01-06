@@ -11,6 +11,7 @@
     <div class="panel">
       <h1>Coffee Shops in Lansing</h1>
       <input class="input" placeholder="Enter a Location" type="text" >
+
       <ul class="list" data-bind="foreach: locations">
         <li data-bind="text: title, click: $parent.zoomOnLocation">
         </li>
@@ -23,7 +24,7 @@
     <script type="text/javascript" src="js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAjNszJ8s54ne-wzhciy_vObCYNO_C8EUQ&callback=initMap"
+      src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAjNszJ8s54ne-wzhciy_vObCYNO_C8EUQ&libraries=places&callback=initMap"
       async defer>
     </script>
   </body>
