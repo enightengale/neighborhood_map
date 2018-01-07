@@ -34,7 +34,7 @@ li {
 
 li:hover {
   transition: background 1s ease;
-  background-color: #b5b4b4;
+  background-color: white;
   font-size: 20px;
   padding: 5px;
 }
