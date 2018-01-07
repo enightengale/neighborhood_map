@@ -48,7 +48,19 @@ function AppViewModel(){
       title: this.locations()[i].title,
       animation: google.maps.Animation.DROP
     });
-    console.log(this.locations()[i]);
+
+    //create infowindow and give it content
+    var infowindow = new google.maps.InfoWindow({
+      content: `<div id="streetView"<h1>${marker.title}</h1></div>`,
+      maxWidth: 200
+    });
+    //give the markers the infowindow I created above^^
+    marker.infowindow = infowindow;
+    //when markers clicked open in infowindow
+    marker.addListener("click", function(){
+
+      this.infowindow.open(map, this);
+    });
 
     // when any of the elements in ul are clicked run this function
     this.zoomOnLocation = function(data){
@@ -56,6 +68,7 @@ function AppViewModel(){
       map.setZoom(18);
       map.setCenter(data.location);
     }
+
   }
 
  }
