@@ -10,10 +10,10 @@
   <body>
     <div class="panel">
       <h1>Coffee Shops in Lansing</h1>
-      <input class="input" placeholder="Enter a Location" type="text" >
-
-      <ul class="list" data-bind="foreach: locations">
-        <li data-bind="text: title, click: $parent.zoomOnLocation"></li>
+      <input id="filter" class="input" placeholder="Enter a Location" type="text" >
+      <ul id="products" class="list" data-bind="foreach: locations">
+        <li data-bind="attr: {'id': title}, text: title, click: $parent.zoomOnLocation">
+        </li>
       </ul>
     </div>
     <div id="map">
@@ -23,8 +23,18 @@
     <script type="text/javascript" src="js/app.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-debug.js"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAjNszJ8s54ne-wzhciy_vObCYNO_C8EUQ&libraries=places&callback=initMap"
-      async defer>
+        src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAjNszJ8s54ne-wzhciy_vObCYNO_C8EUQ&libraries=places&callback=initMap"
+        async defer>
     </script>
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script
+        src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+        crossorigin="anonymous">
+  </script>
   </body>
 </html>
