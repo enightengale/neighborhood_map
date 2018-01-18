@@ -9,7 +9,7 @@ function initMap(){
     mapTypeId: "roadmap"
   });
 
-function AppViewModel(){
+var AppViewModel = function(){
 
 
   //hard coding the locations, giving each a lat and lng
