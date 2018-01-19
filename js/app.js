@@ -12,6 +12,7 @@ function initMap(){
 var AppViewModel = function(){
 
 
+
   //hard coding the locations, giving each a lat and lng
   this.locations = ko.observableArray([
     {title: "Espresso Royale", location: {lat: 42.733857, lng: -84.477448}, img: "https://pbs.twimg.com/profile_images/77346209/866162933_l.jpg"},
@@ -22,21 +23,26 @@ var AppViewModel = function(){
     {title: "Allegro Coffee Company", location: {lat: 42.728180, lng: -84.452994}, img: "http://assets.wholefoodsmarket.com/www/departments/coffee-tea/AllegroCoffeeStand.jpg"}
   ]);
 
-  this.places = ko.observableArray(this.locations());
-  this.query = ko.observable("");
+  function ListViewModel(array){
 
-  this.search = function(value) {
-    // remove all the current locations, which removes them from the view
-  AppViewModel.this.locations().removeAll();
+    var self = this;
 
-    for(var x in this.locations()) {
-      if(this.locations()[x].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-        AppViewModel.this.locations().push(this.locations()[x]);
+    self.places = ko.observableArray();
+    self.query = ko.observable("");
+
+    self.search = function(value) {
+      // remove all the current locations, which removes them from the view
+    AppViewModel.array.removeAll();
+
+      for(var x in self.array) {
+        if(array[x].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+          AppViewModel.array.push(array[x]);
+        }
       }
     }
   }
 
-
+  ListViewModel(this.locations());
 
   //make a request to yelp reviews
   fetch("https://api.yelp.com/v3/businesses/gary-danko-san-francisco/reviews", {
@@ -54,9 +60,6 @@ var AppViewModel = function(){
   var marker;
   //loop through locations
   for(let i = 0; i < this.locations().length; i++){
-
-
-
 
     // when any of the elements in ul are clicked run this function
     this.zoomOnLocation = function(data){
