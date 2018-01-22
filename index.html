@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
   <body>
     <div class="panel">
       <h1>Coffee Shops in Lansing</h1>
-      <input class="input" placeholder="Search…" type="search" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off">
+      <input class="input" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" placeholder="Search…" type="search">
       <ul class="list" data-bind="foreach: locations">
         <li data-bind="text: title, click: $parent.zoomOnLocation">
         </li>

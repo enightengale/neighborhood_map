@@ -55,6 +55,14 @@ img {
   height: auto;
 }
 
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
 @media only screen and (max-width: 970px){
   .panel {
     width: 100%;
