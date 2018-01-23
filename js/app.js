@@ -33,6 +33,7 @@ function initMap(){
   var marker;
   //loop through locations
   for(let i = 0; i < locations.length; i++){
+    /*jshint loopfunc: true */
 
     var proxyURL = "https://cors-anywhere.herokuapp.com";
     var review;
