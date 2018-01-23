@@ -1,6 +1,6 @@
 function initMap(){
 
-  var map;
+
   var lansing = {lat: 42.732536, lng: -84.555534};
 
 
@@ -70,9 +70,7 @@ function initMap(){
 
       //create infowindow and give it content
       var infowindow = new google.maps.InfoWindow({
-        content: `<h1>${marker.title}</h1><img src=${marker.img}>
-                  <strong>${user}</strong><p>"${review}"</p>
-                  <strong>Rating</strong><p>${rating}/5</p>`,
+        content: "<h1>" + marker.title + "</h1><img src=" + marker.img + ">\n                  <strong>" + user + "</strong><p>\"" + review + "\"</p>\n                  <strong>Rating</strong><p>" + rating + "/5</p>",
         maxWidth: 200
       });
 
@@ -88,7 +86,7 @@ function initMap(){
             }, 1000);
             //open infowindow
             this.infowindow.open(map, this);
-        }
+        };
       })(marker));
 
     })
@@ -102,7 +100,7 @@ function initMap(){
     var icon = {
       scaledSize: new google.maps.Size(50, 50),
       url: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-food-beverage/058902-ultra-glossy-silver-button-icon-food-beverage-drink-coffee-tea1.png"
-    }
+    };
 
   }
 
@@ -127,7 +125,7 @@ function initMap(){
 
       viewModel.locations.removeAll();
 
-      if (value == "") return;
+      if (value === "") return;
 
       for (var location in locations) {
         if (locations[location].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
