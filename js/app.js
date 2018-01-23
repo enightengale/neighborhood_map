@@ -14,6 +14,10 @@ function initMap(){
   });
 
 
+  function googleError(){
+    alert("We could not connect with google to provide a map, please try again later");
+  }
+
 
   //hard coding the locations, giving each a lat and lng
   var locations = [
@@ -121,7 +125,7 @@ function initMap(){
     //https://gist.github.com/hinchley/5973926
     search: function(value) {
 
-
+      viewModel.locations.removeAll();
 
       if (value == "") return;
 
