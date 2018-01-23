@@ -4,7 +4,7 @@ This application talks with googles api and yelp reviews to give you information
   2. Blue-Owl-Coffee
   3. Strange-Matter-Coffee
   4. Biggby
-  5.Starbucks
+  5. Starbucks
 ### Open project
 1. Download this project
 2. Open index.html to view the project or you could just click [here](https://enightengale.github.io/neighborhood_map/).
