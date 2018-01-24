@@ -1,3 +1,7 @@
+function googleError(){
+  alert("We could not connect with google to provide a map, please try again later");
+}
+
 function initMap(){
 
 
@@ -14,11 +18,6 @@ function initMap(){
   });
 
 
-  function googleError(){
-    alert("We could not connect with google to provide a map, please try again later");
-  }
-
-
   //hard coding the locations, giving each a lat and lng
   var locations = [
     {title: "Espresso-Royale", location: {lat: 42.733857, lng: -84.477448}, img: "https://pbs.twimg.com/profile_images/77346209/866162933_l.jpg"},
@@ -30,10 +29,12 @@ function initMap(){
 
 
 
+
   var marker;
+  var infowindow;
   //loop through locations
   for(let i = 0; i < locations.length; i++){
-    /*jshint loopfunc: true */
+
 
     var proxyURL = "https://cors-anywhere.herokuapp.com";
     var review;
@@ -70,7 +71,7 @@ function initMap(){
 
 
       //create infowindow and give it content
-      var infowindow = new google.maps.InfoWindow({
+      infowindow = new google.maps.InfoWindow({
         content: "<h1>" + marker.title + "</h1><img src=" + marker.img + ">\n                  <strong>" + user + "</strong><p>\"" + review + "\"</p>\n                  <strong>Rating</strong><p>" + rating + "/5</p>",
         maxWidth: 200
       });
@@ -78,6 +79,7 @@ function initMap(){
 
       //give the markers the infowindow I created above^^
       marker.infowindow = infowindow;
+
       //when markers clicked open in infowindow
       marker.addListener("click", (function(marker){
         return function(){
@@ -104,12 +106,18 @@ function initMap(){
     };
 
   }
+  //In viewModel we had to empty locations but if we make a duplicate
+  //then we can use it to display the locations at the start of the app! 
+  var displayedLocations = [];
+  for (var location in locations) {
+    displayedLocations.push(locations[location]);
+  }
 
 
 
   var viewModel = {
 
-    locations: ko.observableArray([]),
+    locations: ko.observableArray(displayedLocations),
     query: ko.observable(''),
 
 
@@ -126,19 +134,31 @@ function initMap(){
 
       viewModel.locations.removeAll();
 
+
       if (value === "") return;
 
       for (var location in locations) {
         if (locations[location].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-
           viewModel.locations.push(locations[location]);
         }
       }
+    },
+    //when the input is empty the push all locations into viewModel.ocations array
+    empty: function(value) {
+
+
+      if (value === "") {
+        for (var location in locations) {
+          viewModel.locations.push(locations[location]);
+      }
+
     }
-  };
+  }
+}
 
 
 
   viewModel.query.subscribe(viewModel.search);
+  viewModel.query.subscribe(viewModel.empty);
   ko.applyBindings(viewModel);
 }
