@@ -65,7 +65,7 @@ img {
 
 @media only screen and (max-width: 970px){
   .panel {
-    width: 100%;
+    width: 90%;
     height: auto;
     position: inherit;
   }
