@@ -31,6 +31,7 @@ function initMap(){
 
 
   var marker;
+  var markers = [];
   var infowindow;
   //loop through locations
   for(let i = 0; i < locations.length; i++){
@@ -65,9 +66,11 @@ function initMap(){
         map: map,
         img: locations[i].img,
         title: locations[i].title,
+        visible: true,
         icon: icon,
         animation: google.maps.Animation.DROP
       });
+      markers.push(marker);
 
 
       //create infowindow and give it content
@@ -107,17 +110,18 @@ function initMap(){
 
   }
   //In viewModel we had to empty locations but if we make a duplicate
-  //then we can use it to display the locations at the start of the app! 
+  //then we can use it to display the locations at the start of the app!
   var displayedLocations = [];
   for (var location in locations) {
     displayedLocations.push(locations[location]);
   }
 
-
+  console.log(markers[0].title);
 
   var viewModel = {
 
     locations: ko.observableArray(displayedLocations),
+    markers: ko.observableArray(markers),
     query: ko.observable(''),
 
 
@@ -135,6 +139,7 @@ function initMap(){
       viewModel.locations.removeAll();
 
 
+
       if (value === "") return;
 
       for (var location in locations) {
@@ -150,11 +155,10 @@ function initMap(){
       if (value === "") {
         for (var location in locations) {
           viewModel.locations.push(locations[location]);
+        }
       }
-
     }
   }
-}
 
 
 
