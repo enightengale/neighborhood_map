@@ -75,7 +75,7 @@ function initMap(){
 
       //create infowindow and give it content
       infowindow = new google.maps.InfoWindow({
-        content: "<h1>" + marker.title + "</h1><img src=" + marker.img + ">\n                  <strong>" + user + "</strong><p>\"" + review + "\"</p>\n                  <strong>Rating</strong><p>" + rating + "/5</p>",
+        content: "<h1>" + marker.title + "</h1><img src=" + marker.img + ">\n                  <strong>" + user + "</strong><p>\"" + review + "\"</p>\n                  <strong>Rating</strong><p>" + rating + "/5</p><p><em>Powered by Yelp</em></p>",
         maxWidth: 200
       });
 
@@ -116,12 +116,12 @@ function initMap(){
     displayedLocations.push(locations[location]);
   }
 
-  console.log(markers[0].title);
+  // console.log(markers[0].title);
 
   var viewModel = {
 
     locations: ko.observableArray(displayedLocations),
-    markers: ko.observableArray(markers),
+    // markers: ko.observableArray(markers),
     query: ko.observable(''),
 
 
