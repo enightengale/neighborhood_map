@@ -1,3 +1,4 @@
+/*jshint loopfunc:true */
 function googleError(){
   alert("We could not connect with google to provide a map, please try again later");
 }
@@ -103,7 +104,7 @@ function initMap(){
   //In viewModel we had to empty locations but if we make a duplicate
   //then we can use it to display the locations at the start of the app!
   var displayedLocations = [];
-  for (var location in locations) {
+   for (var location = 0; location < locations.length; location++) {
     displayedLocations.push(locations[location]);
   }
 
@@ -144,12 +145,12 @@ function initMap(){
 
 
       if (value === "") {
-        for (var location in locations) {
+        for (var location = 0; location < locations.length; location++) {
           viewModel.locations.push(locations[location]);
         }
       }
     }
-  }
+  };
 
 
   viewModel.query.subscribe(viewModel.search);
