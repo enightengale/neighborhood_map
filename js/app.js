@@ -17,24 +17,31 @@ function initMap(){
     mapTypeId: "roadmap"
   });
 
+  //set icon size and url
+  var icon = {
+    scaledSize: new google.maps.Size(50, 50),
+    url: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-food-beverage/058902-ultra-glossy-silver-button-icon-food-beverage-drink-coffee-tea1.png"
+  };
 
-  //hard coding the locations, giving each a lat and lng
+
+  //hard coding the locations, giving each a lat and lng, img, title, and a marker
   var locations = [
-    {title: "Espresso-Royale", location: {lat: 42.733857, lng: -84.477448}, img: "https://pbs.twimg.com/profile_images/77346209/866162933_l.jpg"},
-    {title: "Strange-Matter-Coffee", location: {lat: 42.733741, lng: -84.52225}, img: "https://atasteoflansing.files.wordpress.com/2014/08/dsc_0068.jpg"},
-    {title: "Blue-Owl-Coffee", location: {lat: 42.720327, lng: -84.552019}, img: "http://mediad.publicbroadcasting.net/p/wkar/files/styles/x_large/public/201705/BLUEOWL.JPG"},
-    {title: "Biggby-Coffee", location: {lat: 42.734803, lng: -84.553355}, img: "https://igx.4sqi.net/img/general/200x200/46385009_cT-rmDX4ylYsOqftjFgKPb-Tj0G_0Yn8t8-fnbKfuX4.jpg"},
-    {title: "Starbucks", location: {lat: 42.659817, lng: -84.536947}, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz_FZMqwM54biwMO3B2wkCML53H5riFa192UIAIs-2SIIgOeG4"}
+    {information: {position: {lat: 42.733857, lng: -84.477448}, map: map, img: "https://pbs.twimg.com/profile_images/77346209/866162933_l.jpg", title: "Espresso-Royale", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
+    {information: {position: {lat: 42.733741, lng: -84.52225}, map: map, img: "https://atasteoflansing.files.wordpress.com/2014/08/dsc_0068.jpg", title: "Strange-Matter-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
+    {information: {position: {lat: 42.720327, lng: -84.552019}, map: map, img: "http://mediad.publicbroadcasting.net/p/wkar/files/styles/x_large/public/201705/BLUEOWL.JPG", title: "Blue-Owl-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
+    {information: {position: {lat: 42.734803, lng: -84.553355}, map: map, img: "https://igx.4sqi.net/img/general/200x200/46385009_cT-rmDX4ylYsOqftjFgKPb-Tj0G_0Yn8t8-fnbKfuX4.jpg", title: "Biggby-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
+    {information: {position: {lat: 42.659817, lng: -84.536947}, map: map, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz_FZMqwM54biwMO3B2wkCML53H5riFa192UIAIs-2SIIgOeG4", title: "Starbucks", visible: true, icon: icon, animation: google.maps.Animation.DROP}}
   ];
 
 
 
 
   var marker;
-  var markers = [];
   var infowindow;
   //loop through locations
   for(let i = 0; i < locations.length; i++){
+
+
 
 
     var proxyURL = "https://cors-anywhere.herokuapp.com";
@@ -44,7 +51,7 @@ function initMap(){
     var settings = {
   	  "async": true,
   	  "crossDomain": true,
-  	  "url": proxyURL + "/https://api.yelp.com/v3/businesses/" + locations[i].title + "-lansing" + "/reviews",
+  	  "url": proxyURL + "/https://api.yelp.com/v3/businesses/" + locations[i].information.title + "-lansing" + "/reviews",
   	  "method": "GET",
   	  "headers": {
   	    "authorization": "Bearer 0W7PDC_nxF9zrWkuPuwLH2yfiCfptMgPhKp9ySfAA5GccWvP7LiCMKG4vHDqMI02OgWi8KngO-DarZrkOxVR6VLbZISD1frYpS-UxWzPU6LnmrYyuZaxLE-p5cVXWnYx",
@@ -61,16 +68,7 @@ function initMap(){
 
 
       //make a marker for each location on the map
-      marker = new google.maps.Marker({
-        position: locations[i].location,
-        map: map,
-        img: locations[i].img,
-        title: locations[i].title,
-        visible: true,
-        icon: icon,
-        animation: google.maps.Animation.DROP
-      });
-      markers.push(marker);
+      marker = new google.maps.Marker(locations[i].information);
 
 
       //create infowindow and give it content
@@ -101,13 +99,6 @@ function initMap(){
     });
 
 
-
-    //set icon size and url
-    var icon = {
-      scaledSize: new google.maps.Size(50, 50),
-      url: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-food-beverage/058902-ultra-glossy-silver-button-icon-food-beverage-drink-coffee-tea1.png"
-    };
-
   }
   //In viewModel we had to empty locations but if we make a duplicate
   //then we can use it to display the locations at the start of the app!
@@ -116,12 +107,11 @@ function initMap(){
     displayedLocations.push(locations[location]);
   }
 
-  // console.log(markers[0].title);
+
 
   var viewModel = {
 
     locations: ko.observableArray(displayedLocations),
-    // markers: ko.observableArray(markers),
     query: ko.observable(''),
 
 
@@ -129,26 +119,27 @@ function initMap(){
     zoomOnLocation: function(data){
       //zooms in on the location you clicked
       map.setZoom(18);
-      map.setCenter(data.location);
+      map.setCenter(data.information.position);
     },
 
     //search functionality goes to Peter
     //https://gist.github.com/hinchley/5973926
     search: function(value) {
 
-      viewModel.locations.removeAll();
 
+      viewModel.locations.removeAll();
+      viewModel.locations.information.visible = false;
 
 
       if (value === "") return;
 
       for (var location in locations) {
-        if (locations[location].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+        if (locations[location].information.title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
           viewModel.locations.push(locations[location]);
         }
       }
     },
-    //when the input is empty the push all locations into viewModel.ocations array
+    //when the input is empty the push all locations into viewModel.locations array
     empty: function(value) {
 
 
@@ -159,7 +150,6 @@ function initMap(){
       }
     }
   }
-
 
 
   viewModel.query.subscribe(viewModel.search);

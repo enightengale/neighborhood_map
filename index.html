@@ -12,7 +12,7 @@
       <h1>Coffee Shops in Lansing</h1>
       <input class="input" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" placeholder="Search…" type="search">
       <ul class="list" data-bind="foreach: locations">
-        <li data-bind="text: title, click: $parent.zoomOnLocation">
+        <li data-bind="text: information.title, click: $parent.zoomOnLocation">
         </li>
       </ul>
     </div>
