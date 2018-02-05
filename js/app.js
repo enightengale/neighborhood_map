@@ -35,8 +35,8 @@ function initMap(){
   ];
 
 
-
-
+  //empty array to fill with markers
+  var markers = [];
   var marker;
   var infowindow;
   //loop through locations
@@ -70,6 +70,8 @@ function initMap(){
 
       //make a marker for each location on the map
       marker = new google.maps.Marker(locations[i].information);
+      //fill array with markers
+      markers.push(marker);
 
 
       //create infowindow and give it content
@@ -113,6 +115,7 @@ function initMap(){
   var viewModel = {
 
     locations: ko.observableArray(displayedLocations),
+    markers: ko.observableArray(markers),
     query: ko.observable(''),
 
 
@@ -127,9 +130,12 @@ function initMap(){
     //https://gist.github.com/hinchley/5973926
     search: function(value) {
 
-
+      //make markers disappear
+      markers.forEach(function(marker){
+        marker.setVisible(false);
+      });
       viewModel.locations.removeAll();
-      viewModel.locations.information.visible = false;
+
 
 
       if (value === "") return;
@@ -139,12 +145,27 @@ function initMap(){
           viewModel.locations.push(locations[location]);
         }
       }
+
+      markers.forEach(function(marker){
+        if(marker.title.toLowerCase().indexOf(value.toLowerCase()) >= 0){
+          marker.setVisible(true);
+        } else {
+          marker.setVisible(false);
+        }
+
+      });
     },
-    //when the input is empty the push all locations into viewModel.locations array
+    //when the input is empty then push all locations into viewModel.locations array
     empty: function(value) {
 
 
       if (value === "") {
+
+        //make markers appear
+        markers.forEach(function(marker){
+          marker.setVisible(true);
+        });
+
         for (var location = 0; location < locations.length; location++) {
           viewModel.locations.push(locations[location]);
         }
