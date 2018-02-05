@@ -21,7 +21,7 @@ html {
   z-index: 5;
   height: auto;
   width: 20%;
-  background-color: #a2a2a2;
+  background-color: #85b3bb;
   position: absolute;
   padding: 5%;
 }
@@ -34,7 +34,7 @@ li {
 
 li:hover {
   transition: background 1s ease;
-  background-color: white;
+  background-color: #c46d6d;
   font-size: 20px;
   padding: 5px;
   border-radius: 4px;
