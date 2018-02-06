@@ -27,17 +27,19 @@ function initMap(){
 
   //hard coding the locations, giving each a lat and lng, img, title, and a marker
   var locations = [
-    {information: {position: {lat: 42.733857, lng: -84.477448}, map: map, img: "https://pbs.twimg.com/profile_images/77346209/866162933_l.jpg", title: "Espresso-Royale", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
-    {information: {position: {lat: 42.733741, lng: -84.52225}, map: map, img: "https://atasteoflansing.files.wordpress.com/2014/08/dsc_0068.jpg", title: "Strange-Matter-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
-    {information: {position: {lat: 42.720327, lng: -84.552019}, map: map, img: "http://mediad.publicbroadcasting.net/p/wkar/files/styles/x_large/public/201705/BLUEOWL.JPG", title: "Blue-Owl-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
-    {information: {position: {lat: 42.734803, lng: -84.553355}, map: map, img: "https://igx.4sqi.net/img/general/200x200/46385009_cT-rmDX4ylYsOqftjFgKPb-Tj0G_0Yn8t8-fnbKfuX4.jpg", title: "Biggby-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
-    {information: {position: {lat: 42.659817, lng: -84.536947}, map: map, img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz_FZMqwM54biwMO3B2wkCML53H5riFa192UIAIs-2SIIgOeG4", title: "Starbucks", visible: true, icon: icon, animation: google.maps.Animation.DROP}}
+    {information: {position: {lat: 42.733857, lng: -84.477448}, map: map, img: "pictures/espresso_royale.jpg", title: "Espresso-Royale", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
+    {information: {position: {lat: 42.733741, lng: -84.52225}, map: map, img: "pictures/strange_matter.jpg", title: "Strange-Matter-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
+    {information: {position: {lat: 42.720327, lng: -84.552019}, map: map, img: "pictures/blue_owl.jpg", title: "Blue-Owl-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
+    {information: {position: {lat: 42.734803, lng: -84.553355}, map: map, img: "pictures/biggby.jpg", title: "Biggby-Coffee", visible: true, icon: icon, animation: google.maps.Animation.DROP}},
+    {information: {position: {lat: 42.659817, lng: -84.536947}, map: map, img: "pictures/starbucks.jpeg", title: "Starbucks", visible: true, icon: icon, animation: google.maps.Animation.DROP}}
   ];
 
 
   //empty array to fill with markers
   var markers = [];
+  var openInfoWindow;
   var marker;
+  var self;
   var infowindow;
   //loop through locations
   for(let i = 0; i < locations.length; i++){
@@ -84,18 +86,19 @@ function initMap(){
       //give the markers the infowindow I created above^^
       marker.infowindow = infowindow;
 
-      //when markers clicked open in infowindow
-      marker.addListener("click", (function(marker){
-        return function(){
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(function() {
-              marker.setAnimation(null);
-            }, 1000);
-            //open infowindow
-            this.infowindow.open(map, this);
-        };
-      })(marker));
 
+      //when a marker is clicked open its infowindow
+        marker.addListener("click", (function(marker){
+            return function(){
+              marker.setAnimation(google.maps.Animation.BOUNCE);
+                setTimeout(function() {
+                  marker.setAnimation(null);
+                }, 1000);
+                //open infowindow
+
+                this.infowindow.open(map, this);
+            };
+       })(marker));
     })
     .fail(function() {
       alert("We couldn't recieve information from our api,this is not your fault please close your browser and try again");
@@ -121,9 +124,20 @@ function initMap(){
 
     // when any of the elements in ul are clicked run this function
     zoomOnLocation: function(data){
+
       //zooms in on the location you clicked
       map.setZoom(18);
       map.setCenter(data.information.position);
+
+      markers.forEach(function(marker){
+
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+          setTimeout(function() {
+            marker.setAnimation(null);
+          }, 1000);
+          //open infowindow
+          marker.infowindow.open(map, marker);
+      });
     },
 
     //search functionality goes to Peter
