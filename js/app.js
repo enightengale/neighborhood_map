@@ -136,7 +136,7 @@ function initMap(){
             marker.setAnimation(null);
           }, 1000);
           //open infowindow
-          marker.infowindow.open(map, marker);
+          infowindow.open(map, marker);
       });
     },
 
