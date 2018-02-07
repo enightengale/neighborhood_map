@@ -129,15 +129,18 @@ function initMap(){
       map.setZoom(18);
       map.setCenter(data.information.position);
 
+      //open the correct infowindow
       markers.forEach(function(marker){
+        if (marker.title === data.information.title) {
 
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-          setTimeout(function() {
-            marker.setAnimation(null);
-          }, 1000);
-          //open infowindow
-          infowindow.open(map, marker);
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(function() {
+              marker.setAnimation(null);
+            }, 1000);
+          marker.infowindow.open(map, marker);
+        }
       });
+
     },
 
     //search functionality goes to Peter
