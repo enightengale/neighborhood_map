@@ -21,7 +21,7 @@ function initMap(){
   //set icon size and url
   var icon = {
     scaledSize: new google.maps.Size(50, 50),
-    url: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-food-beverage/058902-ultra-glossy-silver-button-icon-food-beverage-drink-coffee-tea1.png"
+    url: "https://images.vexels.com/media/users/3/127458/isolated/preview/bf55be8b77011b390c4c790f978c9fc1-coffee-round-service-icon-by-vexels.png"
   };
 
 
